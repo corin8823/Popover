@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "Popover"
   s.version          = "0.0.1"
-  s.summary          = "Popover is a boolloon library like facebook app."
+  s.summary          = "Popover is a balloon library like facebook app. It is written in pure swift."
   s.homepage         = "https://github.com/corin8823"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = { :type => "MIT", :file => "LICENSE" }

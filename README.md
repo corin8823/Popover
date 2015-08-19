@@ -25,17 +25,18 @@ popover.show(aView, point: startPoint)
 
 ## Installation
 
-### CocoaPods
+### CocoaPods(iOS 8+)
 Popover is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your `Podfile`:
 
 ```ruby
+use_frameworks!
 pod "Popover"
 ```
 
 ### Carthage (iOS 8+)
 You can use [Carthage](https://github.com/Carthage/Carthage) to install `Popover` by adding it to your `Cartfile`:
-```
+```ruby
 github "corin8823/Popover"
 ```
 
@@ -55,9 +56,8 @@ Popover.swift
 - ``case BlackOverlayColor(UIColor)``
 - ``case Type(Popover.PopoverType)``
 
-## Author
-
-corin8823, yusuke.t88@gmail.com
+## Acknowledgments
+Inspired by [DXPopover](https://github.com/xiekw2010/DXPopover) in [xiekw2010](https://github.com/xiekw2010)
 
 ## License
 
