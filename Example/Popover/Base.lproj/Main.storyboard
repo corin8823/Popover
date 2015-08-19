@@ -1,25 +1,96 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NSj-Tm-c7V">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <scene sceneID="cpf-40-9rN">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KqD-tH-A54" customClass="ViewController" customModule="PopoverExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="GhJ-Zb-cpE"/>
+                        <viewControllerLayoutGuide type="bottom" id="Coa-16-dTR"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="T43-KC-HyU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mU4-u9-D2Y">
+                                <rect key="frame" x="22" y="420" width="82" height="30"/>
+                                <state key="normal" title="Up Popover">
+                                    <color key="titleColor" red="0.97647058819999999" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedLeftBottomButton:" destination="KqD-tH-A54" eventType="touchUpInside" id="Trz-0H-y8V"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzU-kr-bWJ">
+                                <rect key="frame" x="441" y="520" width="123" height="30"/>
+                                <state key="normal" title="Up Table Popover">
+                                    <color key="titleColor" red="0.97647058819999999" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedRightButtomButton:" destination="KqD-tH-A54" eventType="touchUpInside" id="T2M-CW-Ps2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="AzU-kr-bWJ" secondAttribute="trailing" constant="20" id="Cpd-ri-2iF"/>
+                            <constraint firstItem="Coa-16-dTR" firstAttribute="top" secondItem="AzU-kr-bWJ" secondAttribute="bottom" constant="50" id="PPX-sG-ca1"/>
+                            <constraint firstItem="mU4-u9-D2Y" firstAttribute="leading" secondItem="T43-KC-HyU" secondAttribute="leadingMargin" constant="6" id="fio-zq-5hu"/>
+                            <constraint firstItem="Coa-16-dTR" firstAttribute="top" secondItem="mU4-u9-D2Y" secondAttribute="bottom" constant="150" id="iFN-w0-8JY"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="nzb-3q-qzp">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="Ldu-zQ-aLm">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wz2-EL-tql">
+                                <rect key="frame" x="484" y="7" width="102" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Down Popover">
+                                    <color key="titleColor" red="0.97647058819999999" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedRightBarButton:" destination="KqD-tH-A54" eventType="touchUpInside" id="nQ2-i4-HCH"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="tappedRightBarButton:" destination="KqD-tH-A54" id="rQb-n9-Ioy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leftBottomButton" destination="mU4-u9-D2Y" id="PGo-Q5-eJB"/>
+                        <outlet property="rightBarButton" destination="Ldu-zQ-aLm" id="qEN-K1-5Pn"/>
+                        <outlet property="rightButtomButton" destination="AzU-kr-bWJ" id="U2x-bB-o4l"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RQK-gj-D3i" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="977" y="1090"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ng9-t5-Obb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NSj-Tm-c7V" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7tY-02-qw4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KqD-tH-A54" kind="relationship" relationship="rootViewController" id="f4a-Qk-ASU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tWq-3k-MwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="1090"/>
         </scene>
     </scenes>
 </document>

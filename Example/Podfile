@@ -1,12 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
 use_frameworks!
 
-target 'Popover_Example', :exclusive => true do
-  pod "Popover", :path => "../"
-end
-
-target 'Popover_Tests', :exclusive => true do
-  pod "Popover", :path => "../"
-
-  pod 'FBSnapshotTestCase'
+target 'PopoverExample' do
+  pod 'Popover', :path => '..'
 end
