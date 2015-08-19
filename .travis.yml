@@ -1,7 +1,7 @@
 # references:
 # * http://www.objc.io/issue-6/travis-ci.html
 # * https://github.com/supermarin/xcpretty#usage
-
+osx_image: xcode6.4
 language: objective-c
 # cache: cocoapods
 # podfile: Example/Podfile
@@ -9,7 +9,12 @@ language: objective-c
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 install:
-- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+- gem install cocoapods -v 0.37.2 --no-document
+
+before_script:
+- cd Example
+- pod install
+
 script:
-- set -o pipefail && xcodebuild test -workspace Example/Popover.xcworkspace -scheme Popover-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
+- set -o pipefail && xcodebuild test -workspace Example/Popover.xcworkspace -scheme PopoverExample -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
 - pod lib lint --quick
