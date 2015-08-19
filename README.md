@@ -6,6 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/Popover.svg?style=flat)](http://cocoapods.org/pods/Popover)
 
 ## Description
+![](https://github.com/corin8823/Popover/blob/master/ScreenShots/Screenshot.gif)
 
 ## Usage
 
