@@ -21,8 +21,31 @@ var popover = Popover()
 popover.show(aView, point: startPoint)
 ```
 
+### Custom
+
+```swift
+@IBOutlet weak var leftBottomButton: UIButton!
+
+let width = self.view.frame.width / 4
+let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+let options = [
+  .Type(.Up),
+  .CornerRadius(width / 2),
+  .AnimationIn(0.3),
+  .BlackOverlayColor(UIColor.redColor()),
+  .ArrowSize(CGSizeZero)
+  ] as [PopoverOption]
+var popover = Popover(options: options, showHandler: {
+  println("showHandler")
+  }, dismissHandler: {
+    println("dismissHandler")
+})
+popover.show(aView, fromView: self.leftBottomButton)
+```
+
 ## Requirements
 - iOS 7.0+
+- Swift1.2
 
 ## Installation
 
