@@ -93,7 +93,7 @@ public class Popover: UIView {
     }
   }
 
-  required public init(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -111,7 +111,7 @@ public class Popover: UIView {
       sideEdge = self.sideEdge
     }
 
-    var outerSideEdge = CGRectGetMaxX(frame) - self.containerView.bounds.size.width
+    let outerSideEdge = CGRectGetMaxX(frame) - self.containerView.bounds.size.width
     if outerSideEdge > 0 {
       frame.origin.x -= (outerSideEdge + sideEdge)
     } else {
@@ -121,7 +121,7 @@ public class Popover: UIView {
     }
     self.frame = frame
 
-    var arrowPoint = self.containerView.convertPoint(self.arrowShowPoint, toView: self)
+    let arrowPoint = self.containerView.convertPoint(self.arrowShowPoint, toView: self)
     let anchorPoint: CGPoint
     switch self.popoverType {
     case .Up:
@@ -132,10 +132,10 @@ public class Popover: UIView {
       anchorPoint = CGPoint(x: arrowPoint.x / frame.size.width, y: 0)
     }
 
-    var lastAnchor = self.layer.anchorPoint
+    let lastAnchor = self.layer.anchorPoint
     self.layer.anchorPoint = anchorPoint
-    var x = self.layer.position.x + (anchorPoint.x - lastAnchor.x) * self.layer.bounds.size.width
-    var y = self.layer.position.y + (anchorPoint.y - lastAnchor.y) * self.layer.bounds.size.height
+    let x = self.layer.position.x + (anchorPoint.x - lastAnchor.x) * self.layer.bounds.size.width
+    let y = self.layer.position.y + (anchorPoint.y - lastAnchor.y) * self.layer.bounds.size.height
     self.layer.position = CGPoint(x: x, y: y)
 
     frame.size.height += self.arrowSize.height
@@ -155,7 +155,7 @@ public class Popover: UIView {
 
   public func show(contentView: UIView, point: CGPoint) {
     let inView = UIApplication.sharedApplication().keyWindow!
-    self.blackOverlay.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+    self.blackOverlay.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
     self.blackOverlay.frame = inView.bounds
     self.blackOverlay.backgroundColor = self.blackOverlayColor
     inView.addSubview(self.blackOverlay)
@@ -211,9 +211,9 @@ public class Popover: UIView {
 
   override public func drawRect(rect: CGRect) {
     super.drawRect(rect)
-    var arrow = UIBezierPath()
-    var color = UIColor.whiteColor()
-    var arrowPoint = self.containerView.convertPoint(self.arrowShowPoint, toView: self)
+    let arrow = UIBezierPath()
+    let color = UIColor.whiteColor()
+    let arrowPoint = self.containerView.convertPoint(self.arrowShowPoint, toView: self)
     switch self.popoverType {
     case .Up:
       arrow.moveToPoint(CGPoint(x: arrowPoint.x, y: self.bounds.height))

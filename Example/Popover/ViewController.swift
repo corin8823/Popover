@@ -30,7 +30,7 @@ class ViewController: UIViewController {
   @IBAction func tappedRightBarButton(sender: UIBarButtonItem) {
     let startPoint = CGPoint(x: self.view.frame.width - 60, y: 55)
     let aView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 180))
-    var popover = Popover()
+    let popover = Popover()
     popover.show(aView, point: startPoint)
   }
 
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
       .Type(.Up),
       .CornerRadius(width / 2)
       ] as [PopoverOption]
-    var popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
+    let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
     popover.show(aView, fromView: self.leftBottomButton)
   }
 
