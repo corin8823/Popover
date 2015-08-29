@@ -15,6 +15,7 @@ public enum PopoverOption {
   case CornerRadius(CGFloat)
   case SideEdge(CGFloat)
   case BlackOverlayColor(UIColor)
+  case Color(UIColor)
   case Type(Popover.PopoverType)
 }
 
@@ -33,6 +34,7 @@ public class Popover: UIView {
   private var sideEdge: CGFloat = 20.0
   private var popoverType: PopoverType = .Down
   private var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
+  private var popoverColor: UIColor = UIColor.whiteColor()
 
   // custom closure
   private var didShowHandler: (() -> ())?
@@ -88,6 +90,8 @@ public class Popover: UIView {
           self.blackOverlayColor = value
         case let .Type(value):
           self.popoverType = value
+        case let .Color(value):
+          self.popoverColor = value
         }
       }
     }
@@ -212,7 +216,7 @@ public class Popover: UIView {
   override public func drawRect(rect: CGRect) {
     super.drawRect(rect)
     var arrow = UIBezierPath()
-    var color = UIColor.whiteColor()
+    var color = self.popoverColor
     var arrowPoint = self.containerView.convertPoint(self.arrowShowPoint, toView: self)
     switch self.popoverType {
     case .Up:
