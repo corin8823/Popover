@@ -221,7 +221,7 @@ public class Popover: UIView {
     switch self.popoverType {
     case .Up:
       arrow.moveToPoint(CGPoint(x: arrowPoint.x, y: self.bounds.height))
-      arrow.addLineToPoint(CGPoint(x: arrowPoint.x - self.arrowSize.width * 0.5, y: self.bounds.height - self.arrowSize.height))
+      arrow.addLineToPoint(CGPoint(x: arrowPoint.x - self.arrowSize.width * 0.5, y: isCornerLeftArrow() ? self.arrowSize.height : self.bounds.height - self.arrowSize.height))
 
       arrow.addLineToPoint(CGPoint(x: self.cornerRadius, y: self.bounds.height - self.arrowSize.height))
       arrow.addArcWithCenter(CGPoint(x: self.cornerRadius, y: self.bounds.height - self.arrowSize.height - self.cornerRadius),
@@ -252,12 +252,12 @@ public class Popover: UIView {
         clockwise: true)
 
       arrow.addLineToPoint(CGPoint(x: arrowPoint.x + self.arrowSize.width * 0.5,
-        y: self.bounds.height - self.arrowSize.height))
+        y: isCornerRightArrow() ? self.arrowSize.height : self.bounds.height - self.arrowSize.height))
 
     case .Down:
       arrow.moveToPoint(CGPoint(x: arrowPoint.x, y: 0))
-      arrow.addLineToPoint(CGPoint(x: arrowPoint.x + self.arrowSize.width * 0.5, y: self.arrowSize.height))
-
+      arrow.addLineToPoint(CGPoint(x: arrowPoint.x + self.arrowSize.width * 0.5, y: isCornerRightArrow() ? self.arrowSize.height+self.bounds.height : self.arrowSize.height))
+      
       arrow.addLineToPoint(CGPoint(x: self.bounds.width - self.cornerRadius, y: self.arrowSize.height))
       arrow.addArcWithCenter(CGPoint(x: self.bounds.width - self.cornerRadius, y: self.arrowSize.height + self.cornerRadius),
         radius: self.cornerRadius,
@@ -285,15 +285,23 @@ public class Popover: UIView {
         startAngle: self.radians(180),
         endAngle: self.radians(270),
         clockwise: true)
-      
+
       arrow.addLineToPoint(CGPoint(x: arrowPoint.x - self.arrowSize.width * 0.5,
-        y: self.arrowSize.height))
+        y: isCornerLeftArrow() ? self.arrowSize.height+self.bounds.height : self.arrowSize.height))
     }
-    
+
     color.setFill()
     arrow.fill()
   }
-  
+
+  private func isCornerLeftArrow() -> Bool {
+    return (self.arrowShowPoint.x == self.frame.origin.x)
+  }
+
+  private func isCornerRightArrow() -> Bool {
+    return (self.arrowShowPoint.x == self.frame.origin.x+self.bounds.width)
+  }
+
   private func radians(degrees: CGFloat) -> CGFloat {
     return (CGFloat(M_PI) * degrees / 180)
   }
