@@ -105,7 +105,7 @@ public class Popover: UIView {
   private func create() {
     var frame = self.contentView.frame
     frame.origin.x = self.arrowShowPoint.x - frame.size.width * 0.5
-    
+
     var sideEdge: CGFloat = 0.0
     if frame.size.width < self.containerView.frame.size.width {
       sideEdge = self.sideEdge
@@ -137,7 +137,7 @@ public class Popover: UIView {
     var x = self.layer.position.x + (anchorPoint.x - lastAnchor.x) * self.layer.bounds.size.width
     var y = self.layer.position.y + (anchorPoint.y - lastAnchor.y) * self.layer.bounds.size.height
     self.layer.position = CGPoint(x: x, y: y)
-    
+
     frame.size.height += self.arrowSize.height
     self.frame = frame
   }
@@ -159,9 +159,9 @@ public class Popover: UIView {
     self.blackOverlay.frame = inView.bounds
     self.blackOverlay.backgroundColor = self.blackOverlayColor
     inView.addSubview(self.blackOverlay)
-    
+
     self.blackOverlay.addTarget(self, action: "dismiss", forControlEvents: .TouchUpInside)
-    
+
     self.containerView = inView
     self.contentView = contentView
     self.contentView.backgroundColor = UIColor.clearColor()
@@ -181,7 +181,7 @@ public class Popover: UIView {
     }
     self.addSubview(self.contentView)
     self.containerView.addSubview(self)
-    
+
     self.transform = CGAffineTransformMakeScale(0.0, 0.0)
     UIView.animateWithDuration(self.animationIn, delay: 0,
       usingSpringWithDamping: 0.7,
@@ -246,10 +246,10 @@ public class Popover: UIView {
         startAngle: self.radians(0),
         endAngle: self.radians(90),
         clockwise: true)
-      
+
       arrow.addLineToPoint(CGPoint(x: arrowPoint.x + self.arrowSize.width * 0.5,
         y: isCornerRightArrow() ? self.arrowSize.height : self.bounds.height - self.arrowSize.height))
-      
+
     case .Down:
       arrow.moveToPoint(CGPoint(x: arrowPoint.x, y: 0))
       arrow.addLineToPoint(CGPoint(x: arrowPoint.x + self.arrowSize.width * 0.5, y: isCornerRightArrow() ? self.arrowSize.height+self.bounds.height : self.arrowSize.height))
