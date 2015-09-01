@@ -80,6 +80,7 @@ Popover.swift
 - ``case SideEdge(CGFloat)``
 - ``case BlackOverlayColor(UIColor)``
 - ``case Type(Popover.PopoverType)``
+- ``case Color(UIColor)``
 
 ## Acknowledgments
 Inspired by [DXPopover](https://github.com/xiekw2010/DXPopover) in [xiekw2010](https://github.com/xiekw2010)
