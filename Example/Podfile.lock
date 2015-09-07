@@ -1,10 +1,20 @@
 PODS:
-  - Popover (0.0.1)
+  - Popover (0.1)
 
 DEPENDENCIES:
-  - Popover
+  - Popover (from `https://github.com/corin8823/Popover.git`, branch `swift-2.0`)
+
+EXTERNAL SOURCES:
+  Popover:
+    :branch: swift-2.0
+    :git: https://github.com/corin8823/Popover.git
+
+CHECKOUT OPTIONS:
+  Popover:
+    :commit: 036684067c890701dbc3a2b6350a41026b4d3a5d
+    :git: https://github.com/corin8823/Popover.git
 
 SPEC CHECKSUMS:
-  Popover: e7b19f6b55651b4c1382e270013112f619eb04bc
+  Popover: f929558a4271c83152826a5f83244f2f516e8442
 
 COCOAPODS: 0.38.2

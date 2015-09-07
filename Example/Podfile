@@ -3,5 +3,5 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'PopoverExample' do
-  pod 'Popover'
+  pod 'Popover', :git => 'https://github.com/corin8823/Popover.git', :branch => 'swift-2.0'
 end
