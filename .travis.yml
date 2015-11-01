@@ -1,7 +1,7 @@
-osx_image: xcode6.4
+osx_image: xcode7
 language: objective-c
 install:
-- gem install cocoapods -v 0.38.2 --no-document
+- gem install cocoapods -v 0.39.0 --no-document
 
 before_script:
 - cd Example
@@ -9,4 +9,4 @@ before_script:
 
 xcode_workspace: Popover.xcworkspace
 xcode_scheme: PopoverExample
-xcode_sdk: iphonesimulator8.4
+xcode_sdk: iphonesimulator
