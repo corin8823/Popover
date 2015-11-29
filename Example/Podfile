@@ -3,5 +3,5 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'PopoverExample' do
-  pod 'Popover'
+  pod 'Popover', :path => "../"
 end
