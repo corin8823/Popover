@@ -2,9 +2,13 @@ PODS:
   - Popover (0.7.0)
 
 DEPENDENCIES:
-  - Popover
+  - Popover (from `../`)
+
+EXTERNAL SOURCES:
+  Popover:
+    :path: ../
 
 SPEC CHECKSUMS:
   Popover: bd417f06cfdd400e58084525a921b4856a2c62f5
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
