@@ -79,6 +79,7 @@ Popover.swift
 - ``case CornerRadius(CGFloat)``
 - ``case SideEdge(CGFloat)``
 - ``case BlackOverlayColor(UIColor)``
+- ``case OverlayBlur(UIBlurEffectStyle)``
 - ``case Type(Popover.PopoverType)``
 - ``case Color(UIColor)``
 
