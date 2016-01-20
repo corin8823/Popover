@@ -180,6 +180,7 @@ public class Popover: UIView {
       self.blackOverlay.addSubview(effectView)
     } else {
       self.blackOverlay.backgroundColor = self.blackOverlayColor
+      self.blackOverlay.alpha = 0
     }
 
     inView.addSubview(self.blackOverlay)
@@ -215,6 +216,13 @@ public class Popover: UIView {
       }){ _ in
         self.didShowHandler?()
     }
+    UIView.animateWithDuration(self.animationIn / 3,
+      delay: 0,
+      options: .CurveLinear,
+      animations: { () -> Void in
+        self.blackOverlay.alpha = 1
+      }, completion: { (_) -> Void in
+    })
   }
 
   public func dismiss() {
@@ -223,6 +231,7 @@ public class Popover: UIView {
         options: .CurveEaseInOut,
         animations: {
           self.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
+          self.blackOverlay.alpha = 0
         }){ _ in
           self.contentView.removeFromSuperview()
           self.blackOverlay.removeFromSuperview()
