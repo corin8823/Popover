@@ -41,7 +41,7 @@ popover.show(aView, fromView: self.leftBottomButton)
 ```
 
 ## Requirements
-- iOS 7.0+
+- iOS 8.0+
 - Xcode 7
 
 ## Installation
