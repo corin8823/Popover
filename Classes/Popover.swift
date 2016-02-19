@@ -158,9 +158,9 @@ public class Popover: UIView {
     let point: CGPoint
     switch self.popoverType {
     case .Up:
-      point = CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2), y: fromView.frame.origin.y)
+        point = inView.convertPoint(CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2), y: fromView.frame.origin.y), fromView: fromView.superview)
     case .Down:
-      point = CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2), y: fromView.frame.origin.y + fromView.frame.size.height)
+        point = inView.convertPoint(CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2), y: fromView.frame.origin.y + fromView.frame.size.height), fromView: fromView.superview)
     }
     self.show(contentView, point: point, inView: inView)
   }
