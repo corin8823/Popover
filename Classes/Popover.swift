@@ -166,7 +166,7 @@ public class Popover: UIView {
     }
 
     inView.addSubview(self.blackOverlay)
-    self.blackOverlay.addTarget(self, action: "dismiss", forControlEvents: .TouchUpInside)
+    self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), forControlEvents: .TouchUpInside)
 
     self.containerView = inView
     self.contentView = contentView
