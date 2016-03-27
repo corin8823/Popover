@@ -28,15 +28,15 @@ public class Popover: UIView {
   }
 
   // custom property
-  private var arrowSize: CGSize = CGSize(width: 16.0, height: 10.0)
-  private var animationIn: NSTimeInterval = 0.6
-  private var animationOut: NSTimeInterval = 0.3
-  private var cornerRadius: CGFloat = 6.0
-  private var sideEdge: CGFloat = 20.0
-  private var popoverType: PopoverType = .Down
-  private var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
-  private var overlayBlur: UIBlurEffect?
-  private var popoverColor: UIColor = UIColor.whiteColor()
+  public var arrowSize: CGSize = CGSize(width: 16.0, height: 10.0)
+  public var animationIn: NSTimeInterval = 0.6
+  public var animationOut: NSTimeInterval = 0.3
+  public var cornerRadius: CGFloat = 6.0
+  public var sideEdge: CGFloat = 20.0
+  public var popoverType: PopoverType = .Down
+  public var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
+  public var overlayBlur: UIBlurEffect?
+  public var popoverColor: UIColor = UIColor.whiteColor()
 
   // custom closure
   private var didShowHandler: (() -> ())?
@@ -48,25 +48,7 @@ public class Popover: UIView {
   private var contentViewFrame: CGRect!
   private var arrowShowPoint: CGPoint!
 
-  public init() {
-    super.init(frame: CGRectZero)
-    self.backgroundColor = UIColor.clearColor()
-  }
-
-  public init(options: [PopoverOption]?) {
-    super.init(frame: CGRectZero)
-    self.backgroundColor = UIColor.clearColor()
-    self.setOptions(options)
-  }
-
-  public init(showHandler: (() -> ())?, dismissHandler: (() -> ())?) {
-    super.init(frame: CGRectZero)
-    self.backgroundColor = UIColor.clearColor()
-    self.didShowHandler = showHandler
-    self.didDismissHandler = dismissHandler
-  }
-
-  public init(options: [PopoverOption]?, showHandler: (() -> ())?, dismissHandler: (() -> ())?) {
+  public init(options: [PopoverOption]? = nil, showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil) {
     super.init(frame: CGRectZero)
     self.backgroundColor = UIColor.clearColor()
     self.setOptions(options)
@@ -219,9 +201,9 @@ public class Popover: UIView {
     UIView.animateWithDuration(self.animationIn / 3,
       delay: 0,
       options: .CurveLinear,
-      animations: { () -> Void in
+      animations: { _ in
         self.blackOverlay.alpha = 1
-      }, completion: { (_) -> Void in
+      }, completion: { _ in
     })
   }
 
