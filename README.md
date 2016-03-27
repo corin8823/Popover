@@ -69,6 +69,7 @@ Popover.swift
 
 ## Customization
 
+### Enum
 - ``case ArrowSize(CGSize)``
 - ``case AnimationIn(NSTimeInterval)``
 - ``case AnimationOut(NSTimeInterval)``
@@ -78,6 +79,17 @@ Popover.swift
 - ``case OverlayBlur(UIBlurEffectStyle)``
 - ``case Type(Popover.PopoverType)``
 - ``case Color(UIColor)``
+
+### Property
+- ``arrowSize: CGSize = CGSize(width: 16.0, height: 10.0)``
+- ``animationIn: NSTimeInterval = 0.6``
+- ``animationOut: NSTimeInterval = 0.3``
+- ``cornerRadius: CGFloat = 6.0``
+- ``sideEdge: CGFloat = 20.0``
+- ``popoverType: PopoverType = .Down``
+- ``blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)``
+- ``overlayBlur: UIBlurEffect?``
+- ``popoverColor: UIColor = UIColor.whiteColor()``
 
 ## Acknowledgments
 Inspired by [DXPopover](https://github.com/xiekw2010/DXPopover) in [xiekw2010](https://github.com/xiekw2010)
