@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TNn-Ow-ArG">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="WNc-ez-xtI">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" id="su2-G5-0Ek" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dku-q1-SdI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yp5-Sv-X73"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VDI-Z4-nkc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ic-yy-j9n">
+                                <rect key="frame" x="26" y="420" width="81" height="30"/>
+                                <state key="normal" title="Up Popover">
+                                    <color key="titleColor" red="0.97647058819999999" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedLeftBottomButton:" destination="su2-G5-0Ek" eventType="touchUpInside" id="XYh-M4-TnR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KL-rm-bVS">
+                                <rect key="frame" x="479" y="520" width="81" height="30"/>
+                                <state key="normal" title="Up Popover">
+                                    <color key="titleColor" red="0.97647058819999999" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedRigthButtomButton:" destination="su2-G5-0Ek" eventType="touchUpInside" id="XCG-Se-Tzh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Yp5-Sv-X73" firstAttribute="top" secondItem="1KL-rm-bVS" secondAttribute="bottom" constant="50" id="TcQ-nU-UEY"/>
+                            <constraint firstItem="Yp5-Sv-X73" firstAttribute="top" secondItem="7Ic-yy-j9n" secondAttribute="bottom" constant="150" id="kGN-jf-f7O"/>
+                            <constraint firstItem="7Ic-yy-j9n" firstAttribute="leading" secondItem="VDI-Z4-nkc" secondAttribute="leadingMargin" constant="6" id="osW-ZP-bfL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1KL-rm-bVS" secondAttribute="trailing" constant="20" id="qle-OA-2L0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="DUD-oa-8zU">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="VBA-qN-MHj">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="myw-DN-8Ru">
+                                <rect key="frame" x="478" y="7" width="102" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Down Popover">
+                                    <color key="titleColor" red="0.97647058819999999" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedRightBarButton:" destination="su2-G5-0Ek" eventType="touchUpInside" id="Dqx-Cc-50E"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="tappedRightBarButton:" destination="su2-G5-0Ek" id="Mc7-rR-nql"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leftBottomButton" destination="7Ic-yy-j9n" id="RIF-qx-idh"/>
+                        <outlet property="rightButtomButton" destination="1KL-rm-bVS" id="HQU-OO-izJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rqH-6z-4iO" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="1090"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="M7F-co-WlH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TNn-Ow-ArG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZBu-9s-rCg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="su2-G5-0Ek" kind="relationship" relationship="rootViewController" id="lyi-sQ-y6P"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AbF-ik-0vG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="1090"/>
+        </scene>
+    </scenes>
+</document>

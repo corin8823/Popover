@@ -16,16 +16,16 @@ public enum PopoverOption {
   case SideEdge(CGFloat)
   case BlackOverlayColor(UIColor)
   case OverlayBlur(UIBlurEffectStyle)
-  case Type(Popover.PopoverType)
+  case Type(PopoverType)
   case Color(UIColor)
 }
 
-public class Popover: UIView {
-
-  public enum PopoverType {
+@objc public enum PopoverType: Int {
     case Up
     case Down
-  }
+}
+
+public class Popover: UIView {
 
   // custom property
   public var arrowSize: CGSize = CGSize(width: 16.0, height: 10.0)
@@ -48,8 +48,13 @@ public class Popover: UIView {
   private var contentViewFrame: CGRect!
   private var arrowShowPoint: CGPoint!
 
-  public init(options: [PopoverOption]? = nil, showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil) {
-    super.init(frame: CGRectZero)
+  public init() {
+    super.init(frame: CGRect.zero)
+    self.backgroundColor = UIColor.clearColor()
+  }
+
+  public init(options: [PopoverOption]?, showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil) {
+    super.init(frame: CGRect.zero)
     self.backgroundColor = UIColor.clearColor()
     self.setOptions(options)
     self.didShowHandler = showHandler
