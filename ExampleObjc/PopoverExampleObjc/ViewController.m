@@ -31,7 +31,12 @@
 - (IBAction)tappedLeftBottomButton:(id)sender {
     CGFloat width = self.view.frame.size.width / 4;
     UIView *aView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, width, width)];
-    Popover *popover = [[Popover alloc] init];
+    Popover *popover = [[Popover alloc] initWithShowHandler:^{
+        NSLog(@"didShowHandler");
+    } dismissHandler:^{
+        NSLog(@"didDismissHandler");
+
+    }];
     popover.cornerRadius = width / 2;
     popover.popoverType = PopoverTypeUp;
     [popover show: aView fromView:self.leftBottomButton];

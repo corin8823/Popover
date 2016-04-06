@@ -53,6 +53,13 @@ public class Popover: UIView {
     self.backgroundColor = UIColor.clearColor()
   }
 
+  public init(showHandler: (() -> ())?, dismissHandler: (() -> ())?) {
+    super.init(frame: CGRect.zero)
+    self.backgroundColor = UIColor.clearColor()
+    self.didShowHandler = showHandler
+    self.didDismissHandler = dismissHandler
+  }
+
   public init(options: [PopoverOption]?, showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil) {
     super.init(frame: CGRect.zero)
     self.backgroundColor = UIColor.clearColor()
