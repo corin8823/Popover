@@ -99,11 +99,6 @@ public class Popover: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override public func layoutSubviews() {
-    super.layoutSubviews()
-    self.create()
-  }
-
   private func create() {
     var frame = self.contentView.frame
     frame.origin.x = self.arrowShowPoint.x - frame.size.width * 0.5
@@ -200,6 +195,7 @@ public class Popover: UIView {
     self.addSubview(self.contentView)
     self.containerView.addSubview(self)
 
+    self.create()
     self.transform = CGAffineTransformMakeScale(0.0, 0.0)
     UIView.animateWithDuration(self.animationIn, delay: 0,
       usingSpringWithDamping: 0.7,
