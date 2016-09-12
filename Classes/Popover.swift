@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 corin8823. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 public enum PopoverOption {
@@ -25,50 +26,50 @@ public enum PopoverOption {
     case down
 }
 
-public class Popover: UIView {
+open class Popover: UIView {
 
   // custom property
-  public var arrowSize: CGSize = CGSize(width: 16.0, height: 10.0)
-  public var animationIn: TimeInterval = 0.6
-  public var animationOut: TimeInterval = 0.3
-  public var cornerRadius: CGFloat = 6.0
-  public var sideEdge: CGFloat = 20.0
-  public var popoverType: PopoverType = .down
-  public var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
-  public var overlayBlur: UIBlurEffect?
-  public var popoverColor: UIColor = UIColor.white()
+  open var arrowSize: CGSize = CGSize(width: 16.0, height: 10.0)
+  open var animationIn: TimeInterval = 0.6
+  open var animationOut: TimeInterval = 0.3
+  open var cornerRadius: CGFloat = 6.0
+  open var sideEdge: CGFloat = 20.0
+  open var popoverType: PopoverType = .down
+  open var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
+  open var overlayBlur: UIBlurEffect?
+  open var popoverColor: UIColor = UIColor.white
 
   // custom closure
-  private var didShowHandler: (() -> ())?
-  private var didDismissHandler: (() -> ())?
+  fileprivate var didShowHandler: (() -> ())?
+  fileprivate var didDismissHandler: (() -> ())?
 
-  private var blackOverlay: UIControl = UIControl()
-  private var containerView: UIView!
-  private var contentView: UIView!
-  private var contentViewFrame: CGRect!
-  private var arrowShowPoint: CGPoint!
+  fileprivate var blackOverlay: UIControl = UIControl()
+  fileprivate var containerView: UIView!
+  fileprivate var contentView: UIView!
+  fileprivate var contentViewFrame: CGRect!
+  fileprivate var arrowShowPoint: CGPoint!
 
   public init() {
     super.init(frame: CGRect.zero)
-    self.backgroundColor = UIColor.clear()
+    self.backgroundColor = UIColor.clear
   }
 
   public init(showHandler: (() -> ())?, dismissHandler: (() -> ())?) {
     super.init(frame: CGRect.zero)
-    self.backgroundColor = UIColor.clear()
+    self.backgroundColor = UIColor.clear
     self.didShowHandler = showHandler
     self.didDismissHandler = dismissHandler
   }
 
   public init(options: [PopoverOption]?, showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil) {
     super.init(frame: CGRect.zero)
-    self.backgroundColor = UIColor.clear()
+    self.backgroundColor = UIColor.clear
     self.setOptions(options)
     self.didShowHandler = showHandler
     self.didDismissHandler = dismissHandler
   }
 
-  private func setOptions(_ options: [PopoverOption]?){
+  fileprivate func setOptions(_ options: [PopoverOption]?){
     if let options = options {
       for option in options {
         switch option {
@@ -99,7 +100,7 @@ public class Popover: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func create() {
+  fileprivate func create() {
     var frame = self.contentView.frame
     frame.origin.x = self.arrowShowPoint.x - frame.size.width * 0.5
 
@@ -139,11 +140,11 @@ public class Popover: UIView {
     self.frame = frame
   }
 
-  public func show(_ contentView: UIView, fromView: UIView) {
-    self.show(contentView, fromView: fromView, inView: UIApplication.shared().keyWindow!)
+  open func show(_ contentView: UIView, fromView: UIView) {
+    self.show(contentView, fromView: fromView, inView: UIApplication.shared.keyWindow!)
   }
 
-  public func show(_ contentView: UIView, fromView: UIView, inView: UIView) {
+  open func show(_ contentView: UIView, fromView: UIView, inView: UIView) {
     let point: CGPoint
     switch self.popoverType {
     case .up:
@@ -154,11 +155,11 @@ public class Popover: UIView {
     self.show(contentView, point: point, inView: inView)
   }
 
-  public func show(_ contentView: UIView, point: CGPoint) {
-    self.show(contentView, point: point, inView: UIApplication.shared().keyWindow!)
+  open func show(_ contentView: UIView, point: CGPoint) {
+    self.show(contentView, point: point, inView: UIApplication.shared.keyWindow!)
   }
 
-  public func show(_ contentView: UIView, point: CGPoint, inView: UIView) {
+  open func show(_ contentView: UIView, point: CGPoint, inView: UIView) {
     self.blackOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     self.blackOverlay.frame = inView.bounds
 
@@ -177,14 +178,14 @@ public class Popover: UIView {
 
     self.containerView = inView
     self.contentView = contentView
-    self.contentView.backgroundColor = UIColor.clear()
+    self.contentView.backgroundColor = UIColor.clear
     self.contentView.layer.cornerRadius = self.cornerRadius
     self.contentView.layer.masksToBounds = true
     self.arrowShowPoint = point
     self.show()
   }
 
-  private func show() {
+  fileprivate func show() {
     self.setNeedsDisplay()
     switch self.popoverType {
     case .up:
@@ -215,7 +216,7 @@ public class Popover: UIView {
     })
   }
 
-  public func dismiss() {
+  open func dismiss() {
     if self.superview != nil {
       UIView.animate(withDuration: self.animationOut, delay: 0,
         options: UIViewAnimationOptions(),
@@ -231,7 +232,7 @@ public class Popover: UIView {
     }
   }
 
-  override public func draw(_ rect: CGRect) {
+  override open func draw(_ rect: CGRect) {
     super.draw(rect)
     let arrow = UIBezierPath()
     let color = self.popoverColor
@@ -352,15 +353,15 @@ public class Popover: UIView {
     arrow.fill()
   }
 
-  private func isCornerLeftArrow() -> Bool {
+  fileprivate func isCornerLeftArrow() -> Bool {
     return self.arrowShowPoint.x == self.frame.origin.x
   }
 
-  private func isCornerRightArrow() -> Bool {
+  fileprivate func isCornerRightArrow() -> Bool {
     return self.arrowShowPoint.x == self.frame.origin.x + self.bounds.width
   }
 
-  private func radians(_ degrees: CGFloat) -> CGFloat {
+  fileprivate func radians(_ degrees: CGFloat) -> CGFloat {
     return (CGFloat(M_PI) * degrees / 180)
   }
 }
