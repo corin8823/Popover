@@ -15,10 +15,10 @@ class ViewController: UIViewController {
   @IBOutlet weak var leftBottomButton: UIButton!
   @IBOutlet weak var rightButtomButton: UIButton!
 
-  private var texts = ["Edit", "Delete", "Report"]
+  fileprivate var texts = ["Edit", "Delete", "Report"]
 
-  private var popover: Popover!
-  private var popoverOptions: [PopoverOption] = [
+  fileprivate var popover: Popover!
+  fileprivate var popoverOptions: [PopoverOption] = [
     .type(.up),
     .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
   ]
