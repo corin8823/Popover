@@ -52,6 +52,7 @@ open class Popover: UIView {
   public init() {
     super.init(frame: CGRect.zero)
     self.backgroundColor = UIColor.clear
+    self.accessibilityViewIsModal = true
   }
 
   public init(showHandler: (() -> ())?, dismissHandler: (() -> ())?) {
@@ -59,6 +60,7 @@ open class Popover: UIView {
     self.backgroundColor = UIColor.clear
     self.didShowHandler = showHandler
     self.didDismissHandler = dismissHandler
+    self.accessibilityViewIsModal = true
   }
 
   public init(options: [PopoverOption]?, showHandler: (() -> ())? = nil, dismissHandler: (() -> ())? = nil) {
@@ -67,6 +69,7 @@ open class Popover: UIView {
     self.setOptions(options)
     self.didShowHandler = showHandler
     self.didDismissHandler = dismissHandler
+    self.accessibilityViewIsModal = true
   }
 
   fileprivate func setOptions(_ options: [PopoverOption]?){
@@ -214,6 +217,11 @@ open class Popover: UIView {
         self.blackOverlay.alpha = 1
       }, completion: { _ in
     })
+  }
+  
+  open override func accessibilityPerformEscape() -> Bool {
+    self.dismiss()
+    return true
   }
 
   open func dismiss() {
