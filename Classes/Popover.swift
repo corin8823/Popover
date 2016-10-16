@@ -40,6 +40,8 @@ open class Popover: UIView {
   open var popoverColor: UIColor = UIColor.white
 
   // custom closure
+  open var willShowHandler: (() -> ())?
+  open var willDismissHandler: (() -> ())?
   open var didShowHandler: (() -> ())?
   open var didDismissHandler: (() -> ())?
 
@@ -201,6 +203,7 @@ open class Popover: UIView {
 
     self.create()
     self.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+	self.willShowHandler?()
     UIView.animate(withDuration: self.animationIn, delay: 0,
       usingSpringWithDamping: 0.7,
       initialSpringVelocity: 3,
@@ -226,6 +229,7 @@ open class Popover: UIView {
 
   open func dismiss() {
     if self.superview != nil {
+      self.willDismissHandler?()
       UIView.animate(withDuration: self.animationOut, delay: 0,
         options: UIViewAnimationOptions(),
         animations: {
