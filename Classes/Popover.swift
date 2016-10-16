@@ -40,8 +40,8 @@ open class Popover: UIView {
   open var popoverColor: UIColor = UIColor.white
 
   // custom closure
-  fileprivate var didShowHandler: (() -> ())?
-  fileprivate var didDismissHandler: (() -> ())?
+  open var didShowHandler: (() -> ())?
+  open var didDismissHandler: (() -> ())?
 
   fileprivate var blackOverlay: UIControl = UIControl()
   fileprivate var containerView: UIView!
