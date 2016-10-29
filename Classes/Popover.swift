@@ -239,6 +239,7 @@ open class Popover: UIView {
           self.contentView.removeFromSuperview()
           self.blackOverlay.removeFromSuperview()
           self.removeFromSuperview()
+          self.transform = CGAffineTransform.identity
           self.didDismissHandler?()
       }
     }
