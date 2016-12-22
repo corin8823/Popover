@@ -50,7 +50,19 @@ class ViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.isScrollEnabled = false
-    self.popover = Popover(options: self.popoverOptions, showHandler: nil, dismissHandler: nil)
+    self.popover = Popover(options: self.popoverOptions)
+    self.popover.willShowHandler = {
+      print("willShowHandler")
+    }
+    self.popover.didShowHandler = {
+      print("didDismissHandler")
+    }
+    self.popover.willDismissHandler = {
+      print("willDismissHandler")
+    }
+    self.popover.didDismissHandler = {
+      print("didDismissHandler")
+    }
     self.popover.show(tableView, fromView: self.rightButtomButton)
   }
 }
