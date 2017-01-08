@@ -1,12 +1,11 @@
-osx_image: xcode8.0
+osx_image: xcode8.2
 language: objective-c
 install:
-- gem install cocoapods -v 1.0.1 --no-document
+- gem install cocoapods -v 1.1.1 --no-document
 
 before_script:
 - cd Example
 - pod install
 
-xcode_workspace: Popover.xcworkspace
-xcode_scheme: PopoverExample
-xcode_sdk: iphonesimulator
+script:
+- xcodebuild -workspace Popover.xcworkspace -scheme "PopoverExample" -destination 'platform=iOS Simulator,OS=10.0,name=iPhone 6s' build test | xcpretty
