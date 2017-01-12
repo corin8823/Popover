@@ -145,6 +145,17 @@ open class Popover: UIView {
     self.frame = frame
   }
 
+  open func showAsDialog(_ contentView: UIView) {
+    self.showAsDialog(contentView, inView: UIApplication.shared.keyWindow!)
+  }
+
+  open func showAsDialog(_ contentView: UIView, inView: UIView) {
+    self.arrowSize = .zero
+    let point = CGPoint(x: inView.center.x,
+                        y: inView.center.y - contentView.frame.height / 2)
+    self.show(contentView, point: point, inView: inView)
+  }
+
   open func show(_ contentView: UIView, fromView: UIView) {
     self.show(contentView, fromView: fromView, inView: UIApplication.shared.keyWindow!)
   }
