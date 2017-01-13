@@ -1,5 +1,5 @@
 PODS:
-  - Popover (1.0.2)
+  - Popover (1.0.3)
 
 DEPENDENCIES:
   - Popover (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Popover: 0b9d6e722e8833a077b2f449c8101244e2925a91
+  Popover: 4546c636aeb712cc3ab8050cfb6d0d2fb6a8086f
 
 PODFILE CHECKSUM: 6d2f20b0ca605fb4d048b05500bed6d649d9a399
 
