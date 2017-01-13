@@ -125,7 +125,7 @@ open class Popover: UIView {
     self.frame = frame
 
     let arrowPoint = self.containerView.convert(self.arrowShowPoint, to: self)
-    let anchorPoint: CGPoint
+    var anchorPoint: CGPoint
     switch self.popoverType {
     case .up:
       frame.origin.y = self.arrowShowPoint.y - frame.height - self.arrowSize.height
@@ -133,6 +133,10 @@ open class Popover: UIView {
     case .down:
       frame.origin.y = self.arrowShowPoint.y
       anchorPoint = CGPoint(x: arrowPoint.x / frame.size.width, y: 0)
+    }
+
+    if self.arrowSize == .zero {
+        anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
 
     let lastAnchor = self.layer.anchorPoint
@@ -143,6 +147,17 @@ open class Popover: UIView {
 
     frame.size.height += self.arrowSize.height
     self.frame = frame
+  }
+
+  open func showAsDialog(_ contentView: UIView) {
+    self.showAsDialog(contentView, inView: UIApplication.shared.keyWindow!)
+  }
+
+  open func showAsDialog(_ contentView: UIView, inView: UIView) {
+    self.arrowSize = .zero
+    let point = CGPoint(x: inView.center.x,
+                        y: inView.center.y - contentView.frame.height / 2)
+    self.show(contentView, point: point, inView: inView)
   }
 
   open func show(_ contentView: UIView, fromView: UIView) {
