@@ -19,6 +19,7 @@ public enum PopoverOption {
   case overlayBlur(UIBlurEffectStyle)
   case type(PopoverType)
   case color(UIColor)
+  case dismissOnBlackOverlayTap(Bool)
 }
 
 @objc public enum PopoverType: Int {
@@ -38,6 +39,7 @@ open class Popover: UIView {
   open var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
   open var overlayBlur: UIBlurEffect?
   open var popoverColor: UIColor = UIColor.white
+  open var dismissOnBlackOverlayTap: Bool = true
 
   // custom closure
   open var willShowHandler: (() -> ())?
@@ -96,6 +98,8 @@ open class Popover: UIView {
           self.popoverType = value
         case let .color(value):
           self.popoverColor = value
+        case let .dismissOnBlackOverlayTap(value):
+          self.dismissOnBlackOverlayTap = value
         }
       }
     }
@@ -194,7 +198,10 @@ open class Popover: UIView {
     }
 
     inView.addSubview(self.blackOverlay)
-    self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
+    
+    if self.dismissOnBlackOverlayTap {
+        self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
+    }
 
     self.containerView = inView
     self.contentView = contentView
