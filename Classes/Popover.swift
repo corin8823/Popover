@@ -19,6 +19,8 @@ public enum PopoverOption {
   case overlayBlur(UIBlurEffectStyle)
   case type(PopoverType)
   case color(UIColor)
+  case dismissOnBlackOverlayTap(Bool)
+  case showBlackOverlay(Bool)
 }
 
 @objc public enum PopoverType: Int {
@@ -38,6 +40,8 @@ open class Popover: UIView {
   open var blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)
   open var overlayBlur: UIBlurEffect?
   open var popoverColor: UIColor = UIColor.white
+  open var dismissOnBlackOverlayTap: Bool = true
+  open var showBlackOverlay: Bool = true
 
   // custom closure
   open var willShowHandler: (() -> ())?
@@ -96,6 +100,10 @@ open class Popover: UIView {
           self.popoverType = value
         case let .color(value):
           self.popoverColor = value
+        case let .dismissOnBlackOverlayTap(value):
+          self.dismissOnBlackOverlayTap = value
+        case let .showBlackOverlay(value):
+            self.showBlackOverlay = value
         }
       }
     }
@@ -125,7 +133,7 @@ open class Popover: UIView {
     self.frame = frame
 
     let arrowPoint = self.containerView.convert(self.arrowShowPoint, to: self)
-    let anchorPoint: CGPoint
+    var anchorPoint: CGPoint
     switch self.popoverType {
     case .up:
       frame.origin.y = self.arrowShowPoint.y - frame.height - self.arrowSize.height
@@ -133,6 +141,10 @@ open class Popover: UIView {
     case .down:
       frame.origin.y = self.arrowShowPoint.y
       anchorPoint = CGPoint(x: arrowPoint.x / frame.size.width, y: 0)
+    }
+
+    if self.arrowSize == .zero {
+        anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
 
     let lastAnchor = self.layer.anchorPoint
@@ -143,6 +155,17 @@ open class Popover: UIView {
 
     frame.size.height += self.arrowSize.height
     self.frame = frame
+  }
+
+  open func showAsDialog(_ contentView: UIView) {
+    self.showAsDialog(contentView, inView: UIApplication.shared.keyWindow!)
+  }
+
+  open func showAsDialog(_ contentView: UIView, inView: UIView) {
+    self.arrowSize = .zero
+    let point = CGPoint(x: inView.center.x,
+                        y: inView.center.y - contentView.frame.height / 2)
+    self.show(contentView, point: point, inView: inView)
   }
 
   open func show(_ contentView: UIView, fromView: UIView) {
@@ -165,21 +188,26 @@ open class Popover: UIView {
   }
 
   open func show(_ contentView: UIView, point: CGPoint, inView: UIView) {
-    self.blackOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    self.blackOverlay.frame = inView.bounds
+    if showBlackOverlay {
+        self.blackOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.blackOverlay.frame = inView.bounds
 
-    if let overlayBlur = self.overlayBlur {
-      let effectView = UIVisualEffectView(effect: overlayBlur)
-      effectView.frame = self.blackOverlay.bounds
-      effectView.isUserInteractionEnabled = false
-      self.blackOverlay.addSubview(effectView)
-    } else {
-      self.blackOverlay.backgroundColor = self.blackOverlayColor
-      self.blackOverlay.alpha = 0
+        if let overlayBlur = self.overlayBlur {
+          let effectView = UIVisualEffectView(effect: overlayBlur)
+          effectView.frame = self.blackOverlay.bounds
+          effectView.isUserInteractionEnabled = false
+          self.blackOverlay.addSubview(effectView)
+        } else {
+          self.blackOverlay.backgroundColor = self.blackOverlayColor
+          self.blackOverlay.alpha = 0
+        }
+
+        inView.addSubview(self.blackOverlay)
+        
+        if self.dismissOnBlackOverlayTap {
+            self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
+        }
     }
-
-    inView.addSubview(self.blackOverlay)
-    self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
 
     self.containerView = inView
     self.contentView = contentView
