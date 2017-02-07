@@ -42,6 +42,8 @@ open class Popover: UIView {
   open var popoverColor: UIColor = UIColor.white
   open var dismissOnBlackOverlayTap: Bool = true
   open var showBlackOverlay: Bool = true
+  open var highlightFromView: Bool = false
+  open var highlightCornerRadius: CGFloat = 0
 
   // custom closure
   open var willShowHandler: (() -> ())?
@@ -157,6 +159,20 @@ open class Popover: UIView {
     self.frame = frame
   }
 
+  fileprivate func createHighlightLayer(fromView: UIView, inView: UIView) {
+    let path = UIBezierPath(rect: inView.bounds)
+    let highlightRect = inView.convert(fromView.frame, from: fromView.superview)
+    let highlightPath = UIBezierPath(roundedRect: highlightRect, cornerRadius: self.highlightCornerRadius)
+    path.append(highlightPath)
+    path.usesEvenOddFillRule = true
+
+    let fillLayer = CAShapeLayer()
+    fillLayer.path = path.cgPath
+    fillLayer.fillRule = kCAFillRuleEvenOdd
+    fillLayer.fillColor = self.blackOverlayColor.cgColor
+    self.blackOverlay.layer.addSublayer(fillLayer)
+  }
+
   open func showAsDialog(_ contentView: UIView) {
     self.showAsDialog(contentView, inView: UIApplication.shared.keyWindow!)
   }
@@ -180,6 +196,11 @@ open class Popover: UIView {
     case .down:
         point = inView.convert(CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2), y: fromView.frame.origin.y + fromView.frame.size.height), from: fromView.superview)
     }
+
+    if self.highlightFromView {
+        self.createHighlightLayer(fromView: fromView, inView: inView)
+    }
+
     self.show(contentView, point: point, inView: inView)
   }
 
@@ -198,7 +219,9 @@ open class Popover: UIView {
           effectView.isUserInteractionEnabled = false
           self.blackOverlay.addSubview(effectView)
         } else {
-          self.blackOverlay.backgroundColor = self.blackOverlayColor
+          if !self.highlightFromView {
+            self.blackOverlay.backgroundColor = self.blackOverlayColor
+          }
           self.blackOverlay.alpha = 0
         }
 
