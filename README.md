@@ -30,11 +30,11 @@ popover.show(aView, point: startPoint)
 let width = self.view.frame.width / 4
 let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
 let options = [
-  .Type(.Up),
-  .CornerRadius(width / 2),
-  .AnimationIn(0.3),
-  .BlackOverlayColor(UIColor.redColor()),
-  .ArrowSize(CGSizeZero)
+  .type(.Up),
+  .cornerRadius(width / 2),
+  .animationIn(0.3),
+  .blackOverlayColor(UIColor.redColor()),
+  .arrowSize(CGSizeZero)
   ] as [PopoverOption]
 let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
 popover.show(aView, fromView: self.leftBottomButton)
@@ -72,15 +72,17 @@ Popover.swift
 ## Customization
 
 ### Enum
-- ``case ArrowSize(CGSize)``
-- ``case AnimationIn(NSTimeInterval)``
-- ``case AnimationOut(NSTimeInterval)``
-- ``case CornerRadius(CGFloat)``
-- ``case SideEdge(CGFloat)``
-- ``case BlackOverlayColor(UIColor)``
-- ``case OverlayBlur(UIBlurEffectStyle)``
-- ``case Type(Popover.PopoverType)``
-- ``case Color(UIColor)``
+- ``case arrowSize(CGSize)``
+- ``case animationIn(NSTimeInterval)``
+- ``case animationOut(NSTimeInterval)``
+- ``case cornerRadius(CGFloat)``
+- ``case sideEdge(CGFloat)``
+- ``case blackOverlayColor(UIColor)``
+- ``case overlayBlur(UIBlurEffectStyle)``
+- ``case type(Popover.PopoverType)``
+- ``case color(UIColor)``
+- ``case dismissOnBlackOverlayTap(Bool)``
+- ``case showBlackOverlay(Bool)``
 
 ### Property
 - ``arrowSize: CGSize = CGSize(width: 16.0, height: 10.0)``
