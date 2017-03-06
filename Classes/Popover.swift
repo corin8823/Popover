@@ -174,7 +174,7 @@ open class Popover: UIView {
   }
 
   open func showAsDialog(_ contentView: UIView) {
-    self.showAsDialog(contentView, inView: UIApplication.shared.keyWindow!)
+    self.showAsDialog(contentView, inView: UIApplication.shared.windows.first!)
   }
 
   open func showAsDialog(_ contentView: UIView, inView: UIView) {
@@ -185,7 +185,7 @@ open class Popover: UIView {
   }
 
   open func show(_ contentView: UIView, fromView: UIView) {
-    self.show(contentView, fromView: fromView, inView: UIApplication.shared.keyWindow!)
+    self.show(contentView, fromView: fromView, inView: UIApplication.shared.windows.first!)
   }
 
   open func show(_ contentView: UIView, fromView: UIView, inView: UIView) {
@@ -205,7 +205,7 @@ open class Popover: UIView {
   }
 
   open func show(_ contentView: UIView, point: CGPoint) {
-    self.show(contentView, point: point, inView: UIApplication.shared.keyWindow!)
+    self.show(contentView, point: point, inView: UIApplication.shared.windows.first!)
   }
 
   open func show(_ contentView: UIView, point: CGPoint, inView: UIView) {
