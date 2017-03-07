@@ -30,11 +30,11 @@ popover.show(aView, point: startPoint)
 let width = self.view.frame.width / 4
 let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
 let options = [
-  .type(.Up),
+  .type(.up),
   .cornerRadius(width / 2),
   .animationIn(0.3),
-  .blackOverlayColor(UIColor.redColor()),
-  .arrowSize(CGSizeZero)
+  .blackOverlayColor(UIColor.red),
+  .arrowSize(CGSize.zero)
   ] as [PopoverOption]
 let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
 popover.show(aView, fromView: self.leftBottomButton)
@@ -42,13 +42,13 @@ popover.show(aView, fromView: self.leftBottomButton)
 
 ## Requirements
 - iOS 8.0+
-- swift 3.0
+- Swift 3.0
 
 If you use Swift 2.2 or 2.3, try Popover 0.9.1.
 
 ## Installation
 
-### CocoaPods(iOS 8+)
+### CocoaPods (iOS 8+)
 Popover is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your `Podfile`:
 
@@ -90,10 +90,10 @@ Popover.swift
 - ``animationOut: NSTimeInterval = 0.3``
 - ``cornerRadius: CGFloat = 6.0``
 - ``sideEdge: CGFloat = 20.0``
-- ``popoverType: PopoverType = .Down``
+- ``popoverType: PopoverType = .down``
 - ``blackOverlayColor: UIColor = UIColor(white: 0.0, alpha: 0.2)``
 - ``overlayBlur: UIBlurEffect?``
-- ``popoverColor: UIColor = UIColor.whiteColor()``
+- ``popoverColor: UIColor = UIColor.white``
 
 ## Acknowledgments
 Inspired by [DXPopover](https://github.com/xiekw2010/DXPopover) in [xiekw2010](https://github.com/xiekw2010)
