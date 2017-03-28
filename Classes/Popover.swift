@@ -426,6 +426,6 @@ open class Popover: UIView {
   }
 
   fileprivate func radians(_ degrees: CGFloat) -> CGFloat {
-    return (CGFloat(M_PI) * degrees / 180)
+    return (CGFloat(Double.pi) * degrees / 180)
   }
 }
