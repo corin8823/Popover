@@ -21,6 +21,7 @@ public enum PopoverOption {
   case color(UIColor)
   case dismissOnBlackOverlayTap(Bool)
   case showBlackOverlay(Bool)
+  case dismissOnPopover
 }
 
 @objc public enum PopoverType: Int {
@@ -42,6 +43,7 @@ open class Popover: UIView {
   open var popoverColor: UIColor = UIColor.white
   open var dismissOnBlackOverlayTap: Bool = true
   open var showBlackOverlay: Bool = true
+  open var dismissOnPopover: Bool = false
   open var highlightFromView: Bool = false
   open var highlightCornerRadius: CGFloat = 0
 
@@ -106,6 +108,8 @@ open class Popover: UIView {
           self.dismissOnBlackOverlayTap = value
         case let .showBlackOverlay(value):
             self.showBlackOverlay = value
+        case .dismissOnPopover:
+            self.dismissOnPopover = true
         }
       }
     }
@@ -239,6 +243,10 @@ open class Popover: UIView {
         if self.dismissOnBlackOverlayTap {
             self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
         }
+    }
+    
+    if self.dismissOnPopover {
+        inView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Popover.dismiss)))
     }
 
     self.containerView = inView
