@@ -58,6 +58,7 @@ open class Popover: UIView {
   fileprivate var contentView: UIView!
   fileprivate var contentViewFrame: CGRect!
   fileprivate var arrowShowPoint: CGPoint!
+  fileprivate var tapGestureRecognizer: UITapGestureRecognizer?
 
   public init() {
     super.init(frame: CGRect.zero)
@@ -246,7 +247,9 @@ open class Popover: UIView {
     }
     
     if self.dismissOnPopover {
-        inView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Popover.dismiss)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(Popover.dismiss))
+        inView.addGestureRecognizer(tapGestureRecognizer)
+        self.tapGestureRecognizer = tapGestureRecognizer
     }
 
     self.containerView = inView
@@ -310,6 +313,9 @@ open class Popover: UIView {
           self.transform = CGAffineTransform.identity
           self.didDismissHandler?()
       }
+    }
+    if let tapGestureRecognizer = tapGestureRecognizer {
+        containerView.removeGestureRecognizer(tapGestureRecognizer)
     }
   }
 
