@@ -37,10 +37,7 @@ class ViewController: UIViewController {
   @IBAction func tappedLeftBottomButton(_ sender: UIButton) {
     let width = self.view.frame.width / 4
     let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
-    let options = [
-      .type(.up),
-      .cornerRadius(width / 2)
-      ] as [PopoverOption]
+    let options: [PopoverOption] = [.type(.up), .cornerRadius(width / 2), .showBlackOverlay(false)]
     let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
     popover.show(aView, fromView: self.leftBottomButton)
   }
