@@ -44,10 +44,9 @@ class ViewController: UIViewController {
 
   @IBAction func tappedRightButtomButton(_ sender: UIButton) {
     let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 135))
-    tableView.delegate = self
     tableView.dataSource = self
     tableView.isScrollEnabled = false
-    self.popover = Popover(options: self.popoverOptions)
+    self.popover = Popover(options: self.popoverOptions + [.dismissOnPopover])
     self.popover.willShowHandler = {
       print("willShowHandler")
     }
@@ -61,13 +60,6 @@ class ViewController: UIViewController {
       print("didDismissHandler")
     }
     self.popover.show(tableView, fromView: self.rightButtomButton)
-  }
-}
-
-extension ViewController: UITableViewDelegate {
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    self.popover.dismiss()
   }
 }
 
