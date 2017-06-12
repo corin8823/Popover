@@ -218,28 +218,30 @@ open class Popover: UIView {
   }
 
   open func show(_ contentView: UIView, point: CGPoint, inView: UIView) {
-    self.blackOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    self.blackOverlay.frame = inView.bounds
-    inView.addSubview(self.blackOverlay)
-
-    if showBlackOverlay {
-        if let overlayBlur = self.overlayBlur {
-          let effectView = UIVisualEffectView(effect: overlayBlur)
-          effectView.frame = self.blackOverlay.bounds
-          effectView.isUserInteractionEnabled = false
-          self.blackOverlay.addSubview(effectView)
-        } else {
-          if !self.highlightFromView {
-            self.blackOverlay.backgroundColor = self.blackOverlayColor
-          }
-          self.blackOverlay.alpha = 0
+    if self.dismissOnBlackOverlayTap || self.showBlackOverlay {
+        self.blackOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.blackOverlay.frame = inView.bounds
+        inView.addSubview(self.blackOverlay)
+        
+        if showBlackOverlay {
+            if let overlayBlur = self.overlayBlur {
+                let effectView = UIVisualEffectView(effect: overlayBlur)
+                effectView.frame = self.blackOverlay.bounds
+                effectView.isUserInteractionEnabled = false
+                self.blackOverlay.addSubview(effectView)
+            } else {
+                if !self.highlightFromView {
+                    self.blackOverlay.backgroundColor = self.blackOverlayColor
+                }
+                self.blackOverlay.alpha = 0
+            }
+        }
+        
+        if self.dismissOnBlackOverlayTap {
+            self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
         }
     }
-
-    if self.dismissOnBlackOverlayTap {
-        self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
-    }
-
+    
     self.containerView = inView
     self.contentView = contentView
     self.contentView.backgroundColor = UIColor.clear
