@@ -238,6 +238,8 @@ open class Popover: UIView {
 
     if self.dismissOnBlackOverlayTap {
         self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
+    } else {
+        self.blackOverlay.isUserInteractionEnabled = false
     }
 
     self.containerView = inView
