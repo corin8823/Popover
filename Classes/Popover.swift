@@ -174,7 +174,7 @@ open class Popover: UIView {
   }
 
   open func showAsDialog(_ contentView: UIView) {
-    guard let rootView = UIApplication.shared.windows.last ?? UIApplication.shared.keyWindow else {
+    guard let rootView = UIApplication.shared.keyWindow else {
         return
     }
     self.showAsDialog(contentView, inView: rootView)
@@ -188,7 +188,7 @@ open class Popover: UIView {
   }
 
   open func show(_ contentView: UIView, fromView: UIView) {
-    guard let rootView = UIApplication.shared.windows.last ?? UIApplication.shared.keyWindow else {
+    guard let rootView = UIApplication.shared.keyWindow else {
         return
     }
     self.show(contentView, fromView: fromView, inView: rootView)
@@ -198,9 +198,15 @@ open class Popover: UIView {
     let point: CGPoint
     switch self.popoverType {
     case .up:
-        point = inView.convert(CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2), y: fromView.frame.origin.y), from: fromView.superview)
+        point = inView.convert(
+            CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2),
+                    y: fromView.frame.origin.y
+            ), from: fromView.superview)
     case .down:
-        point = inView.convert(CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2), y: fromView.frame.origin.y + fromView.frame.size.height), from: fromView.superview)
+        point = inView.convert(
+            CGPoint(x: fromView.frame.origin.x + (fromView.frame.size.width / 2),
+                    y: fromView.frame.origin.y + fromView.frame.size.height
+            ), from: fromView.superview)
     }
 
     if self.highlightFromView {
@@ -211,7 +217,7 @@ open class Popover: UIView {
   }
 
   open func show(_ contentView: UIView, point: CGPoint) {
-    guard let rootView = UIApplication.shared.windows.last ?? UIApplication.shared.keyWindow else {
+    guard let rootView = UIApplication.shared.keyWindow else {
         return
     }
     self.show(contentView, point: point, inView: rootView)
