@@ -51,7 +51,8 @@ open class Popover: UIView {
   open var didShowHandler: (() -> ())?
   open var didDismissHandler: (() -> ())?
 
-  fileprivate var blackOverlay: UIControl = UIControl()
+  public fileprivate(set) var blackOverlay: UIControl = UIControl()
+
   fileprivate var containerView: UIView!
   fileprivate var contentView: UIView!
   fileprivate var contentViewFrame: CGRect!
