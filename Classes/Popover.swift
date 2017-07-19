@@ -21,6 +21,8 @@ public enum PopoverOption {
   case color(UIColor)
   case dismissOnBlackOverlayTap(Bool)
   case showBlackOverlay(Bool)
+  case springDamping(CGFloat)
+  case initialSpringVelocity(CGFloat)
 }
 
 @objc public enum PopoverType: Int {
@@ -44,6 +46,9 @@ open class Popover: UIView {
   open var showBlackOverlay: Bool = true
   open var highlightFromView: Bool = false
   open var highlightCornerRadius: CGFloat = 0
+  open var springDamping: CGFloat = 0.7
+  open var initialSpringVelocity: CGFloat = 3
+
 
   // custom closure
   open var willShowHandler: (() -> ())?
@@ -107,6 +112,10 @@ open class Popover: UIView {
           self.dismissOnBlackOverlayTap = value
         case let .showBlackOverlay(value):
             self.showBlackOverlay = value
+        case let .springDamping(value):
+            self.springDamping = value
+        case let .initialSpringVelocity(value):
+            self.initialSpringVelocity = value
         }
       }
     }
@@ -273,8 +282,8 @@ open class Popover: UIView {
     self.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
 	self.willShowHandler?()
     UIView.animate(withDuration: self.animationIn, delay: 0,
-      usingSpringWithDamping: 0.7,
-      initialSpringVelocity: 3,
+      usingSpringWithDamping: self.springDamping,
+      initialSpringVelocity: self.initialSpringVelocity,
       options: UIViewAnimationOptions(),
       animations: {
         self.transform = CGAffineTransform.identity
