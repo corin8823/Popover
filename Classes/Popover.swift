@@ -49,7 +49,6 @@ open class Popover: UIView {
   open var springDamping: CGFloat = 0.7
   open var initialSpringVelocity: CGFloat = 3
 
-
   // custom closure
   open var willShowHandler: (() -> ())?
   open var willDismissHandler: (() -> ())?
