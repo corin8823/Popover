@@ -124,6 +124,11 @@ open class Popover: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  override open func layoutSubviews() {
+    super.layoutSubviews()
+    self.contentView.frame = self.bounds
+  }
+
   fileprivate func create() {
     var frame = self.contentView.frame
     frame.origin.x = self.arrowShowPoint.x - frame.size.width * 0.5
