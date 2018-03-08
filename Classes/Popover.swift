@@ -45,6 +45,7 @@ open class Popover: UIView {
   open var dismissOnBlackOverlayTap: Bool = true
   open var showBlackOverlay: Bool = true
   open var highlightFromView: Bool = false
+  open var highlightViewBounds: CGRect? = nil
   open var highlightCornerRadius: CGFloat = 0
   open var springDamping: CGFloat = 0.7
   open var initialSpringVelocity: CGFloat = 3
@@ -139,14 +140,14 @@ open class Popover: UIView {
     self.show(contentView, point: point, inView: inView)
   }
 
-  open func show(_ contentView: UIView, point: CGPoint) {
+  open func show(_ contentView: UIView, point: CGPoint, fromView: UIView? = nil) {
     guard let rootView = UIApplication.shared.keyWindow else {
       return
     }
-    self.show(contentView, point: point, inView: rootView)
+    self.show(contentView, point: point, inView: rootView, fromView: fromView)
   }
 
-  open func show(_ contentView: UIView, point: CGPoint, inView: UIView) {
+    open func show(_ contentView: UIView, point: CGPoint, inView: UIView, fromView: UIView? = nil) {
     if self.dismissOnBlackOverlayTap || self.showBlackOverlay {
       self.blackOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
       self.blackOverlay.frame = inView.bounds
@@ -170,7 +171,11 @@ open class Popover: UIView {
         self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
       }
     }
-    
+
+    if self.highlightFromView, let fromView = fromView {
+        self.createHighlightLayer(fromView: fromView, inView: inView)
+    }
+
     self.containerView = inView
     self.contentView = contentView
     self.contentView.backgroundColor = UIColor.clear
@@ -415,8 +420,28 @@ private extension Popover {
 
   func createHighlightLayer(fromView: UIView, inView: UIView) {
     let path = UIBezierPath(rect: inView.bounds)
-    let highlightRect = inView.convert(fromView.frame, from: fromView.superview)
-    let highlightPath = UIBezierPath(roundedRect: highlightRect, cornerRadius: self.highlightCornerRadius)
+    var highlightRect = inView.convert(fromView.frame, from: fromView.superview)
+
+    var cornerRadii = UIRectCorner.allCorners
+
+    if let highlightViewBounds = highlightViewBounds {
+       let clippedHighlightRect = highlightRect.intersection(highlightViewBounds)
+       if highlightRect != clippedHighlightRect {
+          if clippedHighlightRect.origin.y > highlightRect.origin.y {
+              cornerRadii.remove(UIRectCorner.topLeft)
+              cornerRadii.remove(UIRectCorner.topRight)
+          }
+
+          if clippedHighlightRect.maxY < highlightRect.maxY {
+              cornerRadii.remove(UIRectCorner.bottomLeft)
+              cornerRadii.remove(UIRectCorner.bottomRight)
+          }
+      }
+
+      highlightRect = clippedHighlightRect
+    }
+
+    let highlightPath = UIBezierPath(roundedRect: highlightRect, byRoundingCorners: cornerRadii, cornerRadii: CGSize(width: self.highlightCornerRadius, height: self.highlightCornerRadius))
     path.append(highlightPath)
     path.usesEvenOddFillRule = true
 
