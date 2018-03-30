@@ -120,7 +120,8 @@ open class Popover: UIView {
     let point: CGPoint
     
     if self.popoverType == .auto {
-        if let point = fromView.superview?.convert(fromView.frame.origin, to: nil), point.y + contentView.frame.height + 75 > inView.frame.height {
+        if let point = fromView.superview?.convert(fromView.frame.origin, to: nil),
+            point.y + fromView.frame.height + self.arrowSize.height + contentView.frame.height > inView.frame.height {
             self.popoverType = .up
         } else {
             self.popoverType = .down
