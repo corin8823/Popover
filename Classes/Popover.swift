@@ -28,6 +28,7 @@ public enum PopoverOption {
 @objc public enum PopoverType: Int {
   case up
   case down
+  case auto
 }
 
 open class Popover: UIView {
@@ -117,6 +118,16 @@ open class Popover: UIView {
 
   open func show(_ contentView: UIView, fromView: UIView, inView: UIView) {
     let point: CGPoint
+    
+    if self.popoverType == .auto {
+        if let point = fromView.superview?.convert(fromView.frame.origin, to: nil),
+            point.y + fromView.frame.height + self.arrowSize.height + contentView.frame.height > inView.frame.height {
+            self.popoverType = .up
+        } else {
+            self.popoverType = .down
+        }
+    }
+    
     switch self.popoverType {
     case .up:
       point = inView.convert(
@@ -124,7 +135,7 @@ open class Popover: UIView {
           x: fromView.frame.origin.x + (fromView.frame.size.width / 2),
           y: fromView.frame.origin.y
       ), from: fromView.superview)
-    case .down:
+    case .down, .auto:
       point = inView.convert(
         CGPoint(
           x: fromView.frame.origin.x + (fromView.frame.size.width / 2),
@@ -269,7 +280,7 @@ open class Popover: UIView {
         )
       )
 
-    case .down:
+    case .down, .auto:
       arrow.move(to: CGPoint(x: arrowPoint.x, y: 0))
       arrow.addLine(
         to: CGPoint(
@@ -394,7 +405,7 @@ private extension Popover {
     case .up:
       frame.origin.y = self.arrowShowPoint.y - frame.height - self.arrowSize.height
       anchorPoint = CGPoint(x: arrowPoint.x / frame.size.width, y: 1)
-    case .down:
+    case .down, .auto:
       frame.origin.y = self.arrowShowPoint.y
       anchorPoint = CGPoint(x: arrowPoint.x / frame.size.width, y: 0)
     }
@@ -432,7 +443,7 @@ private extension Popover {
     switch self.popoverType {
     case .up:
       self.contentView.frame.origin.y = 0.0
-    case .down:
+    case .down, .auto:
       self.contentView.frame.origin.y = self.arrowSize.height
     }
     self.addSubview(self.contentView)
