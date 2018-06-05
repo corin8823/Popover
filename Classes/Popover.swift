@@ -16,7 +16,7 @@ public enum PopoverOption {
   case cornerRadius(CGFloat)
   case sideEdge(CGFloat)
   case blackOverlayColor(UIColor)
-  case overlayBlur(UIBlurEffectStyle)
+  case overlayBlur(UIBlurEffect.Style)
   case type(PopoverType)
   case color(UIColor)
   case dismissOnBlackOverlayTap(Bool)
@@ -159,7 +159,7 @@ open class Popover: UIView {
 
   open func show(_ contentView: UIView, point: CGPoint, inView: UIView) {
     if self.dismissOnBlackOverlayTap || self.showBlackOverlay {
-      self.blackOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+      self.blackOverlay.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
       self.blackOverlay.frame = inView.bounds
       inView.addSubview(self.blackOverlay)
 
@@ -178,7 +178,7 @@ open class Popover: UIView {
       }
 
       if self.dismissOnBlackOverlayTap {
-        self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: .touchUpInside)
+        self.blackOverlay.addTarget(self, action: #selector(Popover.dismiss), for: UIControl.Event.touchUpInside)
       }
     }
     
@@ -199,11 +199,12 @@ open class Popover: UIView {
   @objc open func dismiss() {
     if self.superview != nil {
       self.willDismissHandler?()
-      UIView.animate(withDuration: self.animationOut, delay: 0,
-                     options: UIViewAnimationOptions(),
-                     animations: {
-                      self.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
-                      self.blackOverlay.alpha = 0
+      UIView.animate(
+        withDuration: self.animationOut, delay: 0,
+        options: UIView.AnimationOptions(),
+        animations: {
+            self.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
+            self.blackOverlay.alpha = 0
       }){ _ in
         self.contentView.removeFromSuperview()
         self.blackOverlay.removeFromSuperview()
@@ -433,7 +434,7 @@ private extension Popover {
 
     let fillLayer = CAShapeLayer()
     fillLayer.path = path.cgPath
-    fillLayer.fillRule = kCAFillRuleEvenOdd
+    fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
     fillLayer.fillColor = self.blackOverlayColor.cgColor
     self.blackOverlay.layer.addSublayer(fillLayer)
   }
@@ -457,7 +458,7 @@ private extension Popover {
       delay: 0,
       usingSpringWithDamping: self.springDamping,
       initialSpringVelocity: self.initialSpringVelocity,
-      options: UIViewAnimationOptions(),
+      options: UIView.AnimationOptions(),
       animations: {
         self.transform = CGAffineTransform.identity
     }){ _ in
@@ -466,7 +467,7 @@ private extension Popover {
     UIView.animate(
       withDuration: self.animationIn / 3,
       delay: 0,
-      options: .curveLinear,
+      options: UIView.AnimationOptions.curveLinear,
       animations: {
         self.blackOverlay.alpha = 1
     }, completion: nil)
