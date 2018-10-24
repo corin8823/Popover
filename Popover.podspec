@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Classes/*.swift'
   s.pod_target_xcconfig = {
-    'SWIFT_VERSION' => '4.0',
+    'SWIFT_VERSION' => '4.2',
   }
 end
