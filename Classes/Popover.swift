@@ -16,7 +16,7 @@ public enum PopoverOption {
   case cornerRadius(CGFloat)
   case sideEdge(CGFloat)
   case blackOverlayColor(UIColor)
-  case overlayBlur(UIBlurEffectStyle)
+  case overlayBlur(UIBlurEffect.Style)
   case type(PopoverType)
   case color(UIColor)
   case dismissOnBlackOverlayTap(Bool)
@@ -200,7 +200,7 @@ open class Popover: UIView {
     if self.superview != nil {
       self.willDismissHandler?()
       UIView.animate(withDuration: self.animationOut, delay: 0,
-                     options: UIViewAnimationOptions(),
+                     options: UIView.AnimationOptions(),
                      animations: {
                       self.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
                       self.blackOverlay.alpha = 0
@@ -433,7 +433,7 @@ private extension Popover {
 
     let fillLayer = CAShapeLayer()
     fillLayer.path = path.cgPath
-    fillLayer.fillRule = kCAFillRuleEvenOdd
+    fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
     fillLayer.fillColor = self.blackOverlayColor.cgColor
     self.blackOverlay.layer.addSublayer(fillLayer)
   }
@@ -457,7 +457,7 @@ private extension Popover {
       delay: 0,
       usingSpringWithDamping: self.springDamping,
       initialSpringVelocity: self.initialSpringVelocity,
-      options: UIViewAnimationOptions(),
+      options: UIView.AnimationOptions(),
       animations: {
         self.transform = CGAffineTransform.identity
     }){ _ in
