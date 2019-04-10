@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
   fileprivate var popover: Popover!
   fileprivate var popoverOptions: [PopoverOption] = [
-    .type(.up),
+    .type(.auto),
     .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
   ]
 
