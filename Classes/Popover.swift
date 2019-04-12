@@ -31,6 +31,7 @@ public enum PopoverOption {
   case auto
 }
 
+@objcMembers
 open class Popover: UIView {
 
   // custom property
