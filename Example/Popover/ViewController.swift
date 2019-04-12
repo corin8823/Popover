@@ -14,7 +14,9 @@ class ViewController: UIViewController {
   @IBOutlet weak var rightBarButton: UIBarButtonItem!
   @IBOutlet weak var leftBottomButton: UIButton!
   @IBOutlet weak var rightButtomButton: UIButton!
-
+  @IBOutlet weak var leftTopButton: UIButton!
+  @IBOutlet weak var rightCenterButton: UIButton!
+    
   fileprivate var texts = ["Edit", "Delete", "Report"]
 
   fileprivate var popover: Popover!
@@ -61,6 +63,22 @@ class ViewController: UIViewController {
       print("didDismissHandler")
     }
     self.popover.show(tableView, fromView: self.rightButtomButton)
+  }
+    
+  @IBAction func tappedLeftTopButton(_ sender: UIButton) {
+    let width = self.view.frame.width / 4
+    let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+    let options: [PopoverOption] = [.type(.right), .showBlackOverlay(false)]
+    let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
+    popover.show(aView, fromView: self.leftTopButton)
+  }
+    
+  @IBAction func tappedRightCenterButton(_ sender: UIButton) {
+    let width = self.view.frame.width / 4
+    let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+    let options: [PopoverOption] = [.type(.left), .showBlackOverlay(false)]
+    let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
+    popover.show(aView, fromView: self.rightCenterButton)
   }
 }
 
