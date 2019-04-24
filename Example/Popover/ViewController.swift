@@ -9,6 +9,38 @@
 import UIKit
 import Popover
 
+class DetailsViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .white
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.text = "Welcome!"
+        
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: label,
+                               attribute: .centerX,
+                               relatedBy: .equal,
+                               toItem: view,
+                               attribute: .centerX,
+                               multiplier: 1.0,
+                               constant: 0.0),
+            NSLayoutConstraint(item: label,
+                               attribute: .centerY,
+                               relatedBy: .equal,
+                               toItem: view,
+                               attribute: .centerY,
+                               multiplier: 1.0,
+                               constant: 0.0),
+            ])
+    }
+}
+
 class ViewController: UIViewController {
 
   @IBOutlet weak var rightBarButton: UIBarButtonItem!
@@ -67,18 +99,20 @@ class ViewController: UIViewController {
     
   @IBAction func tappedLeftTopButton(_ sender: UIButton) {
     let width = self.view.frame.width / 4
-    let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+    let detailsViewController = DetailsViewController()
+    detailsViewController.view.frame = CGRect(x: 0, y: 0, width: width, height: width)
     let options: [PopoverOption] = [.type(.right), .showBlackOverlay(false)]
     let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
-    popover.show(aView, fromView: self.leftTopButton)
+    popover.show(detailsViewController.view, fromView: self.leftTopButton, inView: view)
   }
     
   @IBAction func tappedRightCenterButton(_ sender: UIButton) {
     let width = self.view.frame.width / 4
-    let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+    let detailsViewController = DetailsViewController()
+    detailsViewController.view.frame = CGRect(x: 0, y: 0, width: width, height: width)
     let options: [PopoverOption] = [.type(.left), .showBlackOverlay(false)]
     let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
-    popover.show(aView, fromView: self.rightCenterButton)
+    popover.show(detailsViewController.view, fromView: self.rightCenterButton, inView: view)
   }
 }
 

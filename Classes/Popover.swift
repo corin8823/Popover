@@ -97,7 +97,25 @@ open class Popover: UIView {
 
   override open func layoutSubviews() {
     super.layoutSubviews()
-    self.contentView.frame = self.bounds
+    
+    switch popoverType {
+    case .up:
+        contentView.frame = CGRect(origin: CGPoint(x: 0, y: 0),
+                                        size: CGSize(width: bounds.width,
+                                                     height: bounds.height - arrowSize.height))
+    case .down, .auto:
+        contentView.frame = CGRect(origin: CGPoint(x: 0, y: arrowSize.height),
+                                        size: CGSize(width: bounds.width,
+                                                     height: bounds.height - arrowSize.height))
+    case .left:
+        contentView.frame = CGRect(origin: CGPoint(x: 0, y: 0),
+                                        size: CGSize(width: bounds.width - arrowSize.height,
+                                                     height: bounds.height))
+    case .right:
+        contentView.frame = CGRect(origin: CGPoint(x: arrowSize.height, y: 0),
+                                   size: CGSize(width: bounds.width - arrowSize.height,
+                                                height: bounds.height))
+    }
   }
 
   open func showAsDialog(_ contentView: UIView) {
@@ -588,14 +606,6 @@ private extension Popover {
 
   func show() {
     self.setNeedsDisplay()
-    switch self.popoverType {
-    case .up:
-      self.contentView.frame.origin.y = 0.0
-    case .down, .auto:
-      self.contentView.frame.origin.y = self.arrowSize.height
-    case .left, .right:
-      self.contentView.frame.origin.x = 0
-    }
     self.addSubview(self.contentView)
     self.containerView.addSubview(self)
 
