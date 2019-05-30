@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Popover"
-  s.version          = "1.2.2"
+  s.version          = "1.2.3"
   s.summary          = "Popover is a balloon library like facebook app. It is written in pure swift."
   s.homepage         = "https://github.com/corin8823"
   s.license          = { :type => "MIT", :file => "LICENSE" }
@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Classes/*.swift'
   s.pod_target_xcconfig = {
-    'SWIFT_VERSION' => '4.2',
+    'SWIFT_VERSION' => '5.0',
   }
 end
