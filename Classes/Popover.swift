@@ -438,12 +438,12 @@ private extension Popover {
     if let highlightViewBounds = highlightViewBounds {
        let clippedHighlightRect = highlightRect.intersection(highlightViewBounds)
        if highlightRect != clippedHighlightRect {
-          if clippedHighlightRect.origin.y > highlightRect.origin.y {
+          if clippedHighlightRect.origin.y > highlightRect.origin.y + self.highlightCornerRadius {
               cornerRadii.remove(UIRectCorner.topLeft)
               cornerRadii.remove(UIRectCorner.topRight)
           }
 
-          if clippedHighlightRect.maxY < highlightRect.maxY {
+          if clippedHighlightRect.maxY < highlightRect.maxY - self.highlightCornerRadius {
               cornerRadii.remove(UIRectCorner.bottomLeft)
               cornerRadii.remove(UIRectCorner.bottomRight)
           }
