@@ -623,11 +623,11 @@ private extension Popover {
   }
 
   var isCornerLeftArrow: Bool {
-    return self.arrowShowPoint.x == self.frame.origin.x
+    return self.arrowShowPoint.x <= self.frame.origin.x + arrowSize.width + cornerRadius
   }
 
   var isCornerRightArrow: Bool {
-    return self.arrowShowPoint.x == self.frame.origin.x + self.bounds.width
+    return self.arrowShowPoint.x >= (self.frame.origin.x + self.bounds.width) - arrowSize.width - cornerRadius
   }
 
   func radians(_ degrees: CGFloat) -> CGFloat {
