@@ -80,6 +80,15 @@ class ViewController: UIViewController {
     let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
     popover.show(aView, fromView: self.rightCenterButton)
   }
+
+  @IBAction func tappedAPositionButton(_ sender: UIButton) {
+    let width = self.view.frame.width / 4
+    let aView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+    let options: [PopoverOption] = [.type(.auto), .showBlackOverlay(false)]
+    let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
+    popover.show(aView, fromView: sender)
+  }
+  
 }
 
 extension ViewController: UITableViewDelegate {
