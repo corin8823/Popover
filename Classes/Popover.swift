@@ -24,6 +24,7 @@ public enum PopoverOption {
   case springDamping(CGFloat)
   case initialSpringVelocity(CGFloat)
   case sideOffset(CGFloat)
+  case borderColor(UIColor)
 }
 
 @objc public enum PopoverType: Int {
@@ -54,6 +55,7 @@ open class Popover: UIView {
   open var springDamping: CGFloat = 0.7
   open var initialSpringVelocity: CGFloat = 3
   open var sideOffset: CGFloat = 6.0
+  open var borderColor: UIColor?
 
   // custom closure
   open var willShowHandler: (() -> ())?
@@ -493,6 +495,10 @@ open class Popover: UIView {
 
     color.setFill()
     arrow.fill()
+    if let borderColor = borderColor {
+      borderColor.setStroke()
+      arrow.stroke()
+    }
   }
 }
 
@@ -530,6 +536,8 @@ private extension Popover {
           self.initialSpringVelocity = value
         case let .sideOffset(value):
           self.sideOffset = value
+        case let .borderColor(value):
+          self.borderColor = value
         }
       }
     }
