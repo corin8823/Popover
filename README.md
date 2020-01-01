@@ -41,11 +41,8 @@ popover.show(aView, fromView: self.leftBottomButton)
 ```
 
 ## Requirements
-- iOS 8.0+
-- Swift 4
-
-If you use Swift 3.0, try Popover 1.1.0.
-If you use Swift 2.2 or 2.3, try Popover 0.9.1.
+- iOS 9.0+
+- Swift 5
 
 ## Installation
 
