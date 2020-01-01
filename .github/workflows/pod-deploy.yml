@@ -2,7 +2,8 @@ name: pod-deploy
 
 on:
   push:
-    tags: v*.*.*
+    tags:
+       - '*'
 
 jobs:
   build:
