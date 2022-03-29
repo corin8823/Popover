@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "Popover",
+    platforms: [.iOS(.v9)],
     products: [
         .library(
             name: "Popover",
@@ -16,5 +17,6 @@ let package = Package(
             name: "Popover",
             dependencies: [],
             path: "Classes/"),
-    ]
+    ],
+    swiftLanguageVersions: [.v4, .v5]
 )
