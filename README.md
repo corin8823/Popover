@@ -68,7 +68,7 @@ Popover.swift
 ```
 
 ### Swift Package Manager
-You can add following git url in file -> Add Packages in top menu and paste the url in 
+You can add following git url in File -> Add Packages in top menu and paste the url in search bar and add it to ur project
 ```
 https://github.com/corin8823/Popover.git
 ```
