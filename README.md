@@ -67,6 +67,19 @@ The class file required for Popover is located in the Classes folder in the root
 Popover.swift
 ```
 
+### Swift Package Manager
+You can add following git url in File -> Add Packages in top menu and paste the url in search bar and add it to ur project
+```
+https://github.com/corin8823/Popover.git
+```
+OR
+You can add it to the dependencies value of your Package.swift
+``` 
+dependencies: [
+    .package(url: "https://github.com/corin8823/Popover.git", from: "1.3.0")
+]
+```
+
 ## Customization
 
 ### Enum
